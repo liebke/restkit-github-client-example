@@ -7,12 +7,47 @@
 //
 
 #import "RootViewController.h"
+#import "GHCommitSet.h"
 
 @implementation RootViewController
+
+@synthesize commits = _commits;
+@synthesize commitsView = _commitsView;
+
+#pragma mark RKObjectLoaderDelegate methods
+
+- (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObjects:(NSArray*)objects {
+	[_commits release];
+	_commits = [[[objects objectAtIndex:0] commits] retain];
+    NSLog(@"Loaded %d commits: %@", [self.commits count], self.commits);
+    [self.commitsView reloadData];
+}
+
+- (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error {
+	UIAlertView* alert = [[[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+	[alert show];
+	NSLog(@"Hit error: %@", error);
+}
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    NSString* repo = @"/liebke/incanter/master";
+    self.title = repo;
+    
+    // Load the object model via RestKit	
+	RKObjectManager* objectManager = [RKObjectManager sharedManager];
+	[objectManager loadObjectsAtResourcePath:repo objectClass:[GHCommitSet class] delegate:self];
+
+}
+
+- (void)dealloc
+{
+    [_commitsView release];
+    [_commits release];
+    [super dealloc];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -35,14 +70,6 @@
 	[super viewDidDisappear:animated];
 }
 
-/*
- // Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-	// Return YES for supported orientations.
-	return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
- */
-
 // Customize the number of sections in the table view.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -51,7 +78,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 0;
+    return [self.commits count];
 }
 
 // Customize the appearance of table view cells.
@@ -65,49 +92,10 @@
     }
 
     // Configure the cell.
+    cell.textLabel.text = [[self.commits objectAtIndex:indexPath.row] message];
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete)
-    {
-        // Delete the row from the data source.
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }
-    else if (editingStyle == UITableViewCellEditingStyleInsert)
-    {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -130,15 +118,12 @@
 
 - (void)viewDidUnload
 {
+    [self setCommitsView:nil];
     [super viewDidUnload];
 
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
     // For example: self.myOutlet = nil;
 }
 
-- (void)dealloc
-{
-    [super dealloc];
-}
 
 @end

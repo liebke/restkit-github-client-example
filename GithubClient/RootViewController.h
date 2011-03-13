@@ -7,10 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <RestKit/RestKit.h>
 
-@interface RootViewController : UITableViewController {
+@interface RootViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource, RKObjectLoaderDelegate> {
+    NSArray* _commits;
+    UITableView *_commitsView;
 
 }
 
+@property (nonatomic, retain) NSArray* commits;
+@property (nonatomic, retain) IBOutlet UITableView *commitsView;
 
 @end

@@ -16,23 +16,119 @@
 		321E3FBD132D2173003FA6C5 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 321E3FBB132D2173003FA6C5 /* MainWindow.xib */; };
 		321E3FC0132D2173003FA6C5 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 321E3FBF132D2173003FA6C5 /* RootViewController.m */; };
 		321E3FC3132D2173003FA6C5 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 321E3FC1132D2173003FA6C5 /* RootViewController.xib */; };
+		321E3FCC132D217E003FA6C5 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 321E3FCA132D217E003FA6C5 /* MainWindow-iPad.xib */; };
+		321E4036132D225A003FA6C5 /* libRestKitCoreData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 321E4031132D225A003FA6C5 /* libRestKitCoreData.a */; };
+		321E4037132D225A003FA6C5 /* libRestKitJSONParserYAJL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 321E4032132D225A003FA6C5 /* libRestKitJSONParserYAJL.a */; };
+		321E4038132D225A003FA6C5 /* libRestKitNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 321E4033132D225A003FA6C5 /* libRestKitNetwork.a */; };
+		321E4039132D225A003FA6C5 /* libRestKitObjectMapping.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 321E4034132D225A003FA6C5 /* libRestKitObjectMapping.a */; };
+		321E403A132D225A003FA6C5 /* libRestKitSupport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 321E4035132D225A003FA6C5 /* libRestKitSupport.a */; };
+		321E403F132D225A003FA6C5 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 321E403B132D225A003FA6C5 /* CFNetwork.framework */; };
+		321E4040132D225A003FA6C5 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 321E403C132D225A003FA6C5 /* CoreData.framework */; };
+		321E4041132D225A003FA6C5 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 321E403D132D225A003FA6C5 /* MobileCoreServices.framework */; };
+		321E4042132D225A003FA6C5 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 321E403E132D225A003FA6C5 /* SystemConfiguration.framework */; };
+		321E4045132D3D16003FA6C5 /* GHCommitSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 321E4044132D3D15003FA6C5 /* GHCommitSet.m */; };
+		321E4048132D3D32003FA6C5 /* GHCommit.m in Sources */ = {isa = PBXBuildFile; fileRef = 321E4047132D3D31003FA6C5 /* GHCommit.m */; };
+		321E404B132D3D49003FA6C5 /* GHUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 321E404A132D3D49003FA6C5 /* GHUser.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		321E3FED132D21D2003FA6C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 321E3FE1132D21D2003FA6C5 /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 253A07FC1255161B00976E89;
+			remoteInfo = RestKitNetwork;
+		};
+		321E3FEF132D21D2003FA6C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 321E3FE1132D21D2003FA6C5 /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 253A08031255162C00976E89;
+			remoteInfo = RestKitObjectMapping;
+		};
+		321E3FF1132D21D2003FA6C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 321E3FE1132D21D2003FA6C5 /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 253A080C12551D3000976E89;
+			remoteInfo = RestKitSupport;
+		};
+		321E3FF3132D21D2003FA6C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 321E3FE1132D21D2003FA6C5 /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2590E64F125231F600531FA8;
+			remoteInfo = "RestKitJSONParser+YAJL";
+		};
+		321E3FF5132D21D2003FA6C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 321E3FE1132D21D2003FA6C5 /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2590E66B1252353700531FA8;
+			remoteInfo = "RestKitJSONParser+SBJSON";
+		};
+		321E3FF7132D21D2003FA6C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 321E3FE1132D21D2003FA6C5 /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 253A081412551D5300976E89;
+			remoteInfo = RestKitCoreData;
+		};
+		321E3FF9132D21D2003FA6C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 321E3FE1132D21D2003FA6C5 /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2523360511E79F090048F9B4;
+			remoteInfo = RestKitThree20;
+		};
+		321E3FFB132D21D2003FA6C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 321E3FE1132D21D2003FA6C5 /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3F6C39A510FE5C95008F47C5;
+			remoteInfo = UISpec;
+		};
+		321E402F132D2244003FA6C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 321E3FE1132D21D2003FA6C5 /* RestKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 25956956126DF0A8004BAC4C;
+			remoteInfo = RestKit;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		321E3FA5132D2172003FA6C5 /* GithubClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GithubClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		321E3FA9132D2172003FA6C5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		321E3FAB132D2172003FA6C5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		321E3FAD132D2172003FA6C5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		321E3FB1132D2172003FA6C5 /* GithubClient-Info.plist */ = {isa = PBXFileReference; path = "GithubClient-Info.plist"; sourceTree = "<group>"; };
+		321E3FB1132D2172003FA6C5 /* GithubClient-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GithubClient-Info.plist"; sourceTree = "<group>"; };
 		321E3FB3132D2172003FA6C5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		321E3FB5132D2172003FA6C5 /* GithubClient-Prefix.pch */ = {isa = PBXFileReference; path = "GithubClient-Prefix.pch"; sourceTree = "<group>"; };
+		321E3FB5132D2172003FA6C5 /* GithubClient-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GithubClient-Prefix.pch"; sourceTree = "<group>"; };
 		321E3FB6132D2172003FA6C5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		321E3FB8132D2173003FA6C5 /* GithubClientAppDelegate.h */ = {isa = PBXFileReference; path = GithubClientAppDelegate.h; sourceTree = "<group>"; };
+		321E3FB8132D2173003FA6C5 /* GithubClientAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GithubClientAppDelegate.h; sourceTree = "<group>"; };
 		321E3FB9132D2173003FA6C5 /* GithubClientAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GithubClientAppDelegate.m; sourceTree = "<group>"; };
 		321E3FBC132D2173003FA6C5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		321E3FBE132D2173003FA6C5 /* RootViewController.h */ = {isa = PBXFileReference; path = RootViewController.h; sourceTree = "<group>"; };
+		321E3FBE132D2173003FA6C5 /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		321E3FBF132D2173003FA6C5 /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		321E3FC2132D2173003FA6C5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RootViewController.xib; sourceTree = "<group>"; };
+		321E3FCB132D217E003FA6C5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "iPad/en.lproj/MainWindow-iPad.xib"; sourceTree = "<group>"; };
+		321E3FE1132D21D2003FA6C5 /* RestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RestKit.xcodeproj; path = RestKit/RestKit.xcodeproj; sourceTree = "<group>"; };
+		321E4031132D225A003FA6C5 /* libRestKitCoreData.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRestKitCoreData.a; sourceTree = SOURCE_ROOT; };
+		321E4032132D225A003FA6C5 /* libRestKitJSONParserYAJL.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRestKitJSONParserYAJL.a; sourceTree = SOURCE_ROOT; };
+		321E4033132D225A003FA6C5 /* libRestKitNetwork.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRestKitNetwork.a; sourceTree = SOURCE_ROOT; };
+		321E4034132D225A003FA6C5 /* libRestKitObjectMapping.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRestKitObjectMapping.a; sourceTree = SOURCE_ROOT; };
+		321E4035132D225A003FA6C5 /* libRestKitSupport.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRestKitSupport.a; sourceTree = SOURCE_ROOT; };
+		321E403B132D225A003FA6C5 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		321E403C132D225A003FA6C5 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		321E403D132D225A003FA6C5 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		321E403E132D225A003FA6C5 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		321E4043132D3D15003FA6C5 /* GHCommitSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCommitSet.h; sourceTree = "<group>"; };
+		321E4044132D3D15003FA6C5 /* GHCommitSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCommitSet.m; sourceTree = "<group>"; };
+		321E4046132D3D31003FA6C5 /* GHCommit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCommit.h; sourceTree = "<group>"; };
+		321E4047132D3D31003FA6C5 /* GHCommit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCommit.m; sourceTree = "<group>"; };
+		321E4049132D3D48003FA6C5 /* GHUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHUser.h; sourceTree = "<group>"; };
+		321E404A132D3D49003FA6C5 /* GHUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +136,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				321E403F132D225A003FA6C5 /* CFNetwork.framework in Frameworks */,
+				321E4040132D225A003FA6C5 /* CoreData.framework in Frameworks */,
+				321E4041132D225A003FA6C5 /* MobileCoreServices.framework in Frameworks */,
+				321E4042132D225A003FA6C5 /* SystemConfiguration.framework in Frameworks */,
+				321E4036132D225A003FA6C5 /* libRestKitCoreData.a in Frameworks */,
+				321E4037132D225A003FA6C5 /* libRestKitJSONParserYAJL.a in Frameworks */,
+				321E4038132D225A003FA6C5 /* libRestKitNetwork.a in Frameworks */,
+				321E4039132D225A003FA6C5 /* libRestKitObjectMapping.a in Frameworks */,
+				321E403A132D225A003FA6C5 /* libRestKitSupport.a in Frameworks */,
 				321E3FAA132D2172003FA6C5 /* UIKit.framework in Frameworks */,
 				321E3FAC132D2172003FA6C5 /* Foundation.framework in Frameworks */,
 				321E3FAE132D2172003FA6C5 /* CoreGraphics.framework in Frameworks */,
@@ -52,6 +157,16 @@
 		321E3F9A132D2172003FA6C5 = {
 			isa = PBXGroup;
 			children = (
+				321E403B132D225A003FA6C5 /* CFNetwork.framework */,
+				321E403C132D225A003FA6C5 /* CoreData.framework */,
+				321E403D132D225A003FA6C5 /* MobileCoreServices.framework */,
+				321E403E132D225A003FA6C5 /* SystemConfiguration.framework */,
+				321E4031132D225A003FA6C5 /* libRestKitCoreData.a */,
+				321E4032132D225A003FA6C5 /* libRestKitJSONParserYAJL.a */,
+				321E4033132D225A003FA6C5 /* libRestKitNetwork.a */,
+				321E4034132D225A003FA6C5 /* libRestKitObjectMapping.a */,
+				321E4035132D225A003FA6C5 /* libRestKitSupport.a */,
+				321E3FE1132D21D2003FA6C5 /* RestKit.xcodeproj */,
 				321E3FAF132D2172003FA6C5 /* GithubClient */,
 				321E3FA8132D2172003FA6C5 /* Frameworks */,
 				321E3FA6132D2172003FA6C5 /* Products */,
@@ -79,11 +194,18 @@
 		321E3FAF132D2172003FA6C5 /* GithubClient */ = {
 			isa = PBXGroup;
 			children = (
+				321E3FC9132D217B003FA6C5 /* iPad */,
 				321E3FB8132D2173003FA6C5 /* GithubClientAppDelegate.h */,
 				321E3FB9132D2173003FA6C5 /* GithubClientAppDelegate.m */,
-				321E3FBB132D2173003FA6C5 /* MainWindow.xib */,
 				321E3FBE132D2173003FA6C5 /* RootViewController.h */,
 				321E3FBF132D2173003FA6C5 /* RootViewController.m */,
+				321E4043132D3D15003FA6C5 /* GHCommitSet.h */,
+				321E4044132D3D15003FA6C5 /* GHCommitSet.m */,
+				321E4046132D3D31003FA6C5 /* GHCommit.h */,
+				321E4047132D3D31003FA6C5 /* GHCommit.m */,
+				321E4049132D3D48003FA6C5 /* GHUser.h */,
+				321E404A132D3D49003FA6C5 /* GHUser.m */,
+				321E3FBB132D2173003FA6C5 /* MainWindow.xib */,
 				321E3FC1132D2173003FA6C5 /* RootViewController.xib */,
 				321E3FB0132D2172003FA6C5 /* Supporting Files */,
 			);
@@ -101,6 +223,29 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		321E3FC9132D217B003FA6C5 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				321E3FCA132D217E003FA6C5 /* MainWindow-iPad.xib */,
+			);
+			name = iPad;
+			sourceTree = "<group>";
+		};
+		321E3FE2132D21D2003FA6C5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				321E3FEE132D21D2003FA6C5 /* libRestKitNetwork.a */,
+				321E3FF0132D21D2003FA6C5 /* libRestKitObjectMapping.a */,
+				321E3FF2132D21D2003FA6C5 /* libRestKitSupport.a */,
+				321E3FF4132D21D2003FA6C5 /* libRestKitJSONParserYAJL.a */,
+				321E3FF6132D21D2003FA6C5 /* libRestKitJSONParserSBJSON.a */,
+				321E3FF8132D21D2003FA6C5 /* libRestKitCoreData.a */,
+				321E3FFA132D21D2003FA6C5 /* libRestKitThree20.a */,
+				321E3FFC132D21D2003FA6C5 /* UISpec.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -115,6 +260,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				321E4030132D2244003FA6C5 /* PBXTargetDependency */,
 			);
 			name = GithubClient;
 			productName = GithubClient;
@@ -136,12 +282,77 @@
 			mainGroup = 321E3F9A132D2172003FA6C5;
 			productRefGroup = 321E3FA6132D2172003FA6C5 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 321E3FE2132D21D2003FA6C5 /* Products */;
+					ProjectRef = 321E3FE1132D21D2003FA6C5 /* RestKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				321E3FA4132D2172003FA6C5 /* GithubClient */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		321E3FEE132D21D2003FA6C5 /* libRestKitNetwork.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRestKitNetwork.a;
+			remoteRef = 321E3FED132D21D2003FA6C5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		321E3FF0132D21D2003FA6C5 /* libRestKitObjectMapping.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRestKitObjectMapping.a;
+			remoteRef = 321E3FEF132D21D2003FA6C5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		321E3FF2132D21D2003FA6C5 /* libRestKitSupport.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRestKitSupport.a;
+			remoteRef = 321E3FF1132D21D2003FA6C5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		321E3FF4132D21D2003FA6C5 /* libRestKitJSONParserYAJL.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRestKitJSONParserYAJL.a;
+			remoteRef = 321E3FF3132D21D2003FA6C5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		321E3FF6132D21D2003FA6C5 /* libRestKitJSONParserSBJSON.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRestKitJSONParserSBJSON.a;
+			remoteRef = 321E3FF5132D21D2003FA6C5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		321E3FF8132D21D2003FA6C5 /* libRestKitCoreData.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRestKitCoreData.a;
+			remoteRef = 321E3FF7132D21D2003FA6C5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		321E3FFA132D21D2003FA6C5 /* libRestKitThree20.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRestKitThree20.a;
+			remoteRef = 321E3FF9132D21D2003FA6C5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		321E3FFC132D21D2003FA6C5 /* UISpec.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = UISpec.app;
+			remoteRef = 321E3FFB132D21D2003FA6C5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		321E3FA3132D2172003FA6C5 /* Resources */ = {
@@ -151,6 +362,7 @@
 				321E3FB4132D2172003FA6C5 /* InfoPlist.strings in Resources */,
 				321E3FBD132D2173003FA6C5 /* MainWindow.xib in Resources */,
 				321E3FC3132D2173003FA6C5 /* RootViewController.xib in Resources */,
+				321E3FCC132D217E003FA6C5 /* MainWindow-iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,10 +376,21 @@
 				321E3FB7132D2172003FA6C5 /* main.m in Sources */,
 				321E3FBA132D2173003FA6C5 /* GithubClientAppDelegate.m in Sources */,
 				321E3FC0132D2173003FA6C5 /* RootViewController.m in Sources */,
+				321E4045132D3D16003FA6C5 /* GHCommitSet.m in Sources */,
+				321E4048132D3D32003FA6C5 /* GHCommit.m in Sources */,
+				321E404B132D3D49003FA6C5 /* GHUser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		321E4030132D2244003FA6C5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = RestKit;
+			targetProxy = 321E402F132D2244003FA6C5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		321E3FB2132D2172003FA6C5 /* InfoPlist.strings */ = {
@@ -194,6 +417,14 @@
 			name = RootViewController.xib;
 			sourceTree = "<group>";
 		};
+		321E3FCA132D217E003FA6C5 /* MainWindow-iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				321E3FCB132D217E003FA6C5 /* en */,
+			);
+			name = "MainWindow-iPad.xib";
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -209,7 +440,13 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				"HEADER_SEARCH_PATHS[arch=*]" = "\"$(SOURCE_ROOT)/RestKit/Build\"";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				"LIBRARY_SEARCH_PATHS[arch=*]" = "\"$(SOURCE_ROOT)/RestKit/Build/$(BUILD_STYLE)-$(PLATFORM_NAME)\"";
+				"OTHER_LDFLAGS[arch=*]" = (
+					"-ObjC",
+					"-all_load",
+				);
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -223,8 +460,14 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				"HEADER_SEARCH_PATHS[arch=*]" = "\"$(SOURCE_ROOT)/RestKit/Build\"";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				"LIBRARY_SEARCH_PATHS[arch=*]" = "\"$(SOURCE_ROOT)/RestKit/Build/$(BUILD_STYLE)-$(PLATFORM_NAME)\"";
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				"OTHER_LDFLAGS[arch=*]" = (
+					"-ObjC",
+					"-all_load",
+				);
 				SDKROOT = iphoneos;
 			};
 			name = Release;
@@ -238,7 +481,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GithubClient/GithubClient-Prefix.pch";
 				INFOPLIST_FILE = "GithubClient/GithubClient-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -251,7 +500,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GithubClient/GithubClient-Prefix.pch";
 				INFOPLIST_FILE = "GithubClient/GithubClient-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -276,6 +531,7 @@
 				321E3FC8132D2173003FA6C5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

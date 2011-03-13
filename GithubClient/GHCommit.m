@@ -11,10 +11,10 @@
 
 @implementation GHCommit
 
-@synthesize message;
-@synthesize url;
-@synthesize author;
-@synthesize committer;
+@synthesize message = _message;
+@synthesize url = _url;
+@synthesize author = _author;
+@synthesize committer = _committer;
 
 
 + (NSDictionary*) elementToPropertyMappings {

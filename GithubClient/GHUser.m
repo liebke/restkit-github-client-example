@@ -10,9 +10,9 @@
 
 @implementation GHUser
 
-@synthesize name;
-@synthesize login;
-@synthesize email;
+@synthesize name = _name;
+@synthesize login = _login;
+@synthesize email = _email;
 
 + (NSDictionary*)elementToPropertyMappings {
     return [NSDictionary dictionaryWithKeysAndObjects:

@@ -11,9 +11,9 @@
 
 
 @interface GHUser : RKObject {
-    NSString* name;
-    NSString* login;
-    NSString* email;
+    NSString* _name;
+    NSString* _login;
+    NSString* _email;
 }
 
 @property (nonatomic, retain) NSString* name;

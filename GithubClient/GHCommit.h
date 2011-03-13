@@ -12,9 +12,9 @@
 
 @interface GHCommit : RKObject {
     NSString* _message;
-    NSString* url;
-    GHUser* author;
-    GHUser* committer;
+    NSString* _url;
+    GHUser* _author;
+    GHUser* _committer;
 }
 
 @property (nonatomic, retain) NSString* message;

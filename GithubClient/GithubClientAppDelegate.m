@@ -21,13 +21,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Initialize RestKit
-	RKObjectManager* objectManager = [RKObjectManager objectManagerWithBaseURL:@"http://github.com/api/v2/json/commits/list"];
-	RKObjectMapper* mapper = objectManager.mapper;
+    RKObjectManager* objectManager = [RKObjectManager objectManagerWithBaseURL:@"http://github.com/api/v2/json/commits/list"];
+    RKObjectMapper* mapper = objectManager.mapper;
 	
-	// Add our element to object mappings
-	[mapper registerClass:[GHUser class] forElementNamed:@"author"];
+    // Add our element to object mappings
+    [mapper registerClass:[GHUser class] forElementNamed:@"author"];
     [mapper registerClass:[GHUser class] forElementNamed:@"committer"];
-	[mapper registerClass:[GHCommit class] forElementNamed:@"commits"];
+    [mapper registerClass:[GHCommit class] forElementNamed:@"commits"];
     
 
     // Override point for customization after application launch.

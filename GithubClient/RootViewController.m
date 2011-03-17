@@ -16,15 +16,22 @@
 
 #pragma mark RKObjectLoaderDelegate methods
 
-- (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObjects:(NSArray*)objects {
+- (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObjects:(NSArray*)objects 
+{
 	[_commits release];
 	_commits = [[[objects objectAtIndex:0] commits] retain];
     NSLog(@"Loaded %d commits: %@", [self.commits count], self.commits);
     [self.commitsView reloadData];
 }
 
-- (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error {
-	UIAlertView* alert = [[[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+- (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error 
+{
+	UIAlertView* alert = [[[UIAlertView alloc] initWithTitle:@"Error" 
+                                                     message:[error localizedDescription] 
+                                                    delegate:nil 
+                                           cancelButtonTitle:@"OK" 
+                                           otherButtonTitles:nil] 
+                          autorelease];
 	[alert show];
 	NSLog(@"Hit error: %@", error);
 }
@@ -39,7 +46,9 @@
     
     // Load the object model via RestKit	
 	RKObjectManager* objectManager = [RKObjectManager sharedManager];
-	[objectManager loadObjectsAtResourcePath:repo objectClass:[GHCommitSet class] delegate:self];
+	[objectManager loadObjectsAtResourcePath:repo 
+                                 objectClass:[GHCommitSet class] 
+                                    delegate:self];
 
 }
 
@@ -88,7 +97,9 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
+                                       reuseIdentifier:CellIdentifier] 
+                autorelease];
     }
 
     // Configure the cell.

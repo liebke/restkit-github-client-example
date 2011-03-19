@@ -9,7 +9,6 @@
 #import "GithubClientAppDelegate.h"
 #import <RestKit/RestKit.h>
 #import "GHCommit.h"
-#import "GHUser.h"
 
 @implementation GithubClientAppDelegate
 
@@ -25,8 +24,6 @@
     RKObjectMapper* mapper = objectManager.mapper;
 	
     // Add our element to object mappings
-    [mapper registerClass:[GHUser class] forElementNamed:@"author"];
-    [mapper registerClass:[GHUser class] forElementNamed:@"committer"];
     [mapper registerClass:[GHCommit class] forElementNamed:@"commits"];
     
 

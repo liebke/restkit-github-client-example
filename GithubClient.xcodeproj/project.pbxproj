@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		320945961333A604003DC1C9 /* GHCommitSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 320945951333A604003DC1C9 /* GHCommitSet.m */; };
 		321E3FAA132D2172003FA6C5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 321E3FA9132D2172003FA6C5 /* UIKit.framework */; };
 		321E3FAC132D2172003FA6C5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 321E3FAB132D2172003FA6C5 /* Foundation.framework */; };
 		321E3FAE132D2172003FA6C5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 321E3FAD132D2172003FA6C5 /* CoreGraphics.framework */; };
@@ -26,7 +27,6 @@
 		321E4040132D225A003FA6C5 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 321E403C132D225A003FA6C5 /* CoreData.framework */; };
 		321E4041132D225A003FA6C5 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 321E403D132D225A003FA6C5 /* MobileCoreServices.framework */; };
 		321E4042132D225A003FA6C5 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 321E403E132D225A003FA6C5 /* SystemConfiguration.framework */; };
-		321E4045132D3D16003FA6C5 /* GHCommitSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 321E4044132D3D15003FA6C5 /* GHCommitSet.m */; };
 		321E4048132D3D32003FA6C5 /* GHCommit.m in Sources */ = {isa = PBXBuildFile; fileRef = 321E4047132D3D31003FA6C5 /* GHCommit.m */; };
 		321E404B132D3D49003FA6C5 /* GHUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 321E404A132D3D49003FA6C5 /* GHUser.m */; };
 /* End PBXBuildFile section */
@@ -98,6 +98,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		320945941333A604003DC1C9 /* GHCommitSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCommitSet.h; sourceTree = "<group>"; };
+		320945951333A604003DC1C9 /* GHCommitSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCommitSet.m; sourceTree = "<group>"; };
 		321E3FA5132D2172003FA6C5 /* GithubClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GithubClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		321E3FA9132D2172003FA6C5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		321E3FAB132D2172003FA6C5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -123,8 +125,6 @@
 		321E403C132D225A003FA6C5 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		321E403D132D225A003FA6C5 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		321E403E132D225A003FA6C5 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		321E4043132D3D15003FA6C5 /* GHCommitSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCommitSet.h; sourceTree = "<group>"; };
-		321E4044132D3D15003FA6C5 /* GHCommitSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCommitSet.m; sourceTree = "<group>"; };
 		321E4046132D3D31003FA6C5 /* GHCommit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHCommit.h; sourceTree = "<group>"; };
 		321E4047132D3D31003FA6C5 /* GHCommit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHCommit.m; sourceTree = "<group>"; };
 		321E4049132D3D48003FA6C5 /* GHUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHUser.h; sourceTree = "<group>"; };
@@ -199,8 +199,8 @@
 				321E3FB9132D2173003FA6C5 /* GithubClientAppDelegate.m */,
 				321E3FBE132D2173003FA6C5 /* RootViewController.h */,
 				321E3FBF132D2173003FA6C5 /* RootViewController.m */,
-				321E4043132D3D15003FA6C5 /* GHCommitSet.h */,
-				321E4044132D3D15003FA6C5 /* GHCommitSet.m */,
+				320945941333A604003DC1C9 /* GHCommitSet.h */,
+				320945951333A604003DC1C9 /* GHCommitSet.m */,
 				321E4046132D3D31003FA6C5 /* GHCommit.h */,
 				321E4047132D3D31003FA6C5 /* GHCommit.m */,
 				321E4049132D3D48003FA6C5 /* GHUser.h */,
@@ -376,9 +376,9 @@
 				321E3FB7132D2172003FA6C5 /* main.m in Sources */,
 				321E3FBA132D2173003FA6C5 /* GithubClientAppDelegate.m in Sources */,
 				321E3FC0132D2173003FA6C5 /* RootViewController.m in Sources */,
-				321E4045132D3D16003FA6C5 /* GHCommitSet.m in Sources */,
 				321E4048132D3D32003FA6C5 /* GHCommit.m in Sources */,
 				321E404B132D3D49003FA6C5 /* GHUser.m in Sources */,
+				320945961333A604003DC1C9 /* GHCommitSet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

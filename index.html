@@ -39,7 +39,7 @@ code { color: #555555; }
     <p>Later posts will focus on improving the functionality and interface of the client, as
     well as using RestKit's Core Data integration to provide local data persistence.</p>
     
-    <p>The source code for the project is available on <a href="https://github.com/liebke/restkit-github-client-example/">Github</a>, and additional iOS resources are available at <a href="http://liebke.me/ios-resources/">http://liebke.me/ios-resources/</a>.</p>
+    <p>The source code for the project is available on <a href="https://github.com/liebke/restkit-github-client-example/">Github</a>, and additional iOS resources are available at <a href="http://liebke.me/ios-resources/">http://liebke.me/ios-resources/</a>, including guides to getting started with iOS and Objective-C development.</p>
 
 
   
@@ -77,26 +77,30 @@ but we will want to create a local git repository for the project, so select the
 <a href="images/restkit-setup/new-project-git.png"><img src="images/restkit-setup/new-project-git.png" width="600" /></a>
 
 <p>
-Once the the project is open, I'm going to set the device to <b>Universal</b> and the scheme to iPad 4.3 simulator.
+Once the project is open, I'm going to set the device to <b>Universal</b> and the scheme to iPad 4.3 simulator.
 </p>
 
 
 <a href="images/restkit-setup/project-start.png"><img src="images/restkit-setup/project-start.png" width="600" /></a>
 
-<p> Next we want to create a RestKit git submodule in our project directory, so open up a terminal window, cd to the project directory and enter:;
+<p> Next we want to create a RestKit git submodule in our project directory, so open up a terminal window, cd to the project directory and enter:
+    
 <pre><code>git submodule add git://github.com/twotoasters/RestKit.git RestKit</code></pre> </p>
 
+    <p>
+    Next open the RestKit project in Xcode, and drag the RestKit.xcodeproj file from the RestKit project window and drop it on to the GithubClient.xcodeproj file. Unfortunately, Xcode will only make a project available in one window at a time, so we can't access the RestKit project files from our project until we close the other windows containing RestKit, and then re-open our project.
+    </p>
+    
 <a href="images/restkit-setup/add-restkit.png"><img src="images/restkit-setup/add-restkit.png" width="600" /></a>
 <br />
 
-<p>
-Next open the RestKit project in Xcode, and drag the RestKit.xcodeproj file from the RestKit project window and drop it on our GithubClient.xcodeproj. Unfortunately, Xcode will only make a project availabe in one window at a time, so we can't access the RestKit project files from our project until we close the other windows containing RestKit, and then re-open our project.
-</p>
+
+    <p>After re-opening our project, you should be able to toggle open the nested RestKit project and see its files.</p>
+
 
 <a href="images/restkit-setup/add-restkit2.png"><img src="images/restkit-setup/add-restkit2.png" width="600" /></a>
 <br />
 
-<p>After re-opening our project, you should be able to toggle open the nested RestKit project and see its files.</p>
 
 <p>Next we want to add the RestKit headers to our header search path, so select the GithubClient project in the navigation pane, then select the project file in the middle pane, and select the <b>Build Settings</b> tab in the main pane; then scroll down to the <b>Search Paths</b> section, and enter the following text (quotes and all) as the value for both debug and release in the <b>Header Search Path</b> section:
 
@@ -147,7 +151,7 @@ Next open the RestKit project in Xcode, and drag the RestKit.xcodeproj file from
 <a href="images/restkit-setup/add-dependencies2.png"><img src="images/restkit-setup/add-dependencies2.png" width="600" /></a>
 <br />
 
-<p>Finally, let's make sure we configured everything correctly by including the following RestKit headers in our <b>RootViewController.h</b> file and the building the project with the <b>Cmd-b</b> keyboard short cut, or by hitting the <b>run</b> button at the top:
+<p>Finally, let's make sure we configured everything correctly by importing the following RestKit headers in our <b>RootViewController.h</b> file and the building the project with the <b>Cmd-b</b> keyboard short cut, or by hitting the <b>run</b> button at the top:
 
 <pre><code>
 #import &lt;RestKit/RestKit.h&gt;
@@ -204,7 +208,7 @@ For this simple client we'll use <a href="http://develop.github.com/p/commits.ht
 
 <h2>Creating RKObjects</h2>
 
-<p>RKObject is a RestKit class that can be mapped to and from JSON objects.  We will create three Objective-C objects, GHCommitSet, GHCommit, and GHUser that we will map to these JSON objects.</p>
+<p>RKObject is a RestKit class that can be mapped to JSON objects.  We will create three Objective-C classes, GHCommitSet, GHCommit, and GHUser that we will map to the JSON objects returned from Github.</p>
 
 <h3>GHUser</h3>
 
@@ -232,7 +236,7 @@ For this simple client we'll use <a href="http://develop.github.com/p/commits.ht
 </code></pre>
 </div>
 
-<p>Next implement <a href="https://github.com/liebke/restkit-github-client-example/blob/part1/GithubClient/GHUser.m">GHUser.m</a>, which will look like any other basic Objective-C class, using @synthesize to implement its properties, but there will be an additional method, <b>elementToPropertyMappings</b>, which returns an <b>NSDictionary</b> that maps attributes in the JSON object to properties in the Obj-C object.</p>
+<p>Next implement <a href="https://github.com/liebke/restkit-github-client-example/blob/part1/GithubClient/GHUser.m">GHUser.m</a>, which will look like any other basic Objective-C class, using @synthesize to implement its properties, but there will be an additional method, <b>elementToPropertyMappings</b>, which returns an <b>NSDictionary</b> that maps attributes in the JSON object to properties in the Objective-C class.</p>
 
 <span class="code-ref"><a href="https://github.com/liebke/restkit-github-client-example/blob/part1/GithubClient/GHUser.m">GHUser.m</a></span>
 <div class="code-listing">
@@ -289,7 +293,7 @@ For this simple client we'll use <a href="http://develop.github.com/p/commits.ht
 </div>
 
 
-<p>Next implement <a href="https://github.com/liebke/restkit-github-client-example/blob/part1/GithubClient/GHCommit.m">GHCommit.m</a>, which will have an <b>elementToPropertyMappings</b> method, just like GHUser, where we'll map the message and url properties to their respective JSON fields. GHCommit will include one more method, called <b>elementToRelationshipMappings</b>, which will map the author and committer JSON fields to GHUser objects.</p>
+<p>Next edit <a href="https://github.com/liebke/restkit-github-client-example/blob/part1/GithubClient/GHCommit.m">GHCommit.m</a>, which will have an <b>elementToPropertyMappings</b> method, just like GHUser, where we'll map the message and url properties to their respective JSON fields. GHCommit will include one more method, called <b>elementToRelationshipMappings</b> that will map the author and committer JSON fields to their respective class properties, which are both GHUser objects.</p>
 
 <span class="code-ref"><a href="https://github.com/liebke/restkit-github-client-example/blob/part1/GithubClient/GHCommit.m">GHCommit.m</a></span>
 <div class="code-listing">
@@ -371,7 +375,7 @@ For this simple client we'll use <a href="http://develop.github.com/p/commits.ht
 </code></pre>
 </div>
 
-<p>Notice that we map <b>commits</b> to the GHCommit class, not NSArray, in the next step we will tell the RKObjectMapper which class <b>commits</b> maps to.</p>
+<p>Notice that the <b>commits</b> property is an NSArray, not a GHCommit, so we'll need to tell the RKObjectMapper to map <b>commits</b> to GHCommit.</p>
 
 
 <h2>Deserializing JSON Objects</h2>
@@ -399,21 +403,21 @@ For this simple client we'll use <a href="http://develop.github.com/p/commits.ht
 </code></pre>
 </div>
 
-<h2>Viewing the Results in a UITableView</h2>
+<h2>Viewing Commit Messages in a UITableView</h2>
 
-<p>Now that JSON to Obj-C mappings are taken care of, let's display the commit messages for a project on github, in this case my <a href="http://incanter.org">Incanter</a> project.</p>
+<p>Now that the JSON to Obj-C mappings are taken care of, let's display the commit messages for a project on github, in this case my <a href="http://github.com/liebke/incanter">Incanter</a> project.</p>
 
 <h3>RootViewController.xib</h3>
 
 <p>First, let's add an <b>IBOutlet</b> called <b>commitsView</b> to the <b>RootViewController.h</b> file and link it to the UITableView in the <b>RootViewController.xib</b> file.</p>
 
-<p>We can do both steps at once with Interface Builder, so open the xib file and select the <b>Assistant editor</b> view, making sure the RootViewController.h file is open in the second pane. Now just Ctrl-drag from UITableView widget to header file (just above the @end keyword),</p>
+<p>We can do both steps at once with Interface Builder, so open the xib file and select the <b>Assistant editor</b> view, making sure the RootViewController.h file is open in the second pane. Now just Ctrl-drag from UITableView widget to the header file (just above the @end keyword),</p>
 
 <span class="code-ref"><a href="https://github.com/liebke/restkit-github-client-example/blob/part1/GithubClient/en.lproj/RootViewController.xib">RootViewController.xib</a></span>
 <a href="images/gh-client/add-outlet.png"><img src="images/gh-client/add-outlet.png" width="600" /></a>
 <br />
 
-<p>and name it <b>commitsView</b> when prompted. That will create the appropriate IBOutlet property in the header, add the @synthesize statement to RootViewController.m (as well as a call to <b>release</b> in its <b>dealloc</b> method), and link the commitsView property to the UITable view in the xib file.</p>
+<p>and name it <b>commitsView</b> when prompted. That will create the appropriate IBOutlet property in the header, add the @synthesize statement to RootViewController.m (as well as add a call to <b>release</b> in its <b>dealloc</b> method), and link the commitsView property to the UITable view in the xib file.</p>
 
 <a href="images/gh-client/add-outlet2.png"><img src="images/gh-client/add-outlet2.png" width="300" /></a>
 <br />
@@ -449,7 +453,7 @@ For this simple client we'll use <a href="http://develop.github.com/p/commits.ht
 <br />
 <h3>RootViewController.m</h3>
 
-<p>In addition to adding the @synthesize statement and call to release in dealloc for the commits property, we'll want to add code to the <b>viewDidLoad</b> method that will retrieve the commit messages for the Incanter project from Github.</p>
+<p>In addition to adding the @synthesize statement and a call to release in dealloc for the commits property, we'll want to add code to the <b>viewDidLoad</b> method that will retrieve the commit messages for the Incanter project from Github.</p>
 
 <p>The call is asynchronous, so we'll need to pass a <b>RKObjectLoaderDelegate</b> object to handle the response, which in this case will be <b>self</b> because RootViewController implements the RKObjectLoaderDelegate</b> protocol, at least it will once we implement the necessary functions.</p>
 
@@ -490,7 +494,7 @@ For this simple client we'll use <a href="http://develop.github.com/p/commits.ht
 <br />
 <h3>RootViewController.m: RKObjectLoaderDelegate methods</h3>
 
-<p>Alright, now we need to implement the <b>objectLoader:didLoadObjects:</b> and <b>objectLoader:didFailWithError:</b> methods of the <b>RKObjectLoaderDelegate</b> protocol. The first method will take an RKObjectLoader and an NSArray containing an array with a single instance of GHCommitSet. We will set the RootViewController's commits instance variable to the value of the GHCommitSet's commits property.</p>
+<p>Alright, now we need to implement the <b>objectLoader:didLoadObjects:</b> and <b>objectLoader:didFailWithError:</b> methods of the <b>RKObjectLoaderDelegate</b> protocol. The first method will take an RKObjectLoader and an NSArray containing a single instance of GHCommitSet. We will set the RootViewController's commits instance variable to the value of the GHCommitSet's commits property.</p>
 
 <span class="code-ref"><a href="https://github.com/liebke/restkit-github-client-example/blob/part1/GithubClient/RootViewController.m">RootViewController.m</a></span>
 <div class="code-listing">
@@ -550,7 +554,7 @@ method, which will just return the count of the <b>commits</b> property.</p>
 </code></pre>
 </div>
 
-<p>Finally, we need to implement the <b>tableView:cellForRowAtIndexPath:</b> method. Most of the implementation is included by the template we used to create the project, we just need to add the line that sets the value of the cell's textLable to the value of the message from the GHCommit object at the indexPath.row passed into the method.</p>
+<p>Finally, we need to implement the <b>tableView:cellForRowAtIndexPath:</b> method. Most of the implementation is included in the template we used to create the project, we just need to add the line that sets the value of the cell's textLabel to the value of the message from the GHCommit object at the indexPath.row passed into the method.</p>
 
 <span class="code-ref"><a href="https://github.com/liebke/restkit-github-client-example/blob/part1/GithubClient/RootViewController.m">RootViewController.m</a></span><div class="code-listing">
 <pre><code>
@@ -580,6 +584,6 @@ method, which will just return the count of the <b>commits</b> property.</p>
 <a href="images/gh-client/ipad-simulator.png"><img src="images/gh-client/ipad-simulator.png" width="300" /></a>
 <br />
 
-<p>Future posts will continue to build this example, adding the ability to browse different projects, see more details on individual commits, and use RestKit's Core Data integration to persist the commit messages to the device.</p>
+<p>Future posts will continue to build on this example, adding the ability to browse different projects, see more details on individual commits, and use RestKit's Core Data integration to persist the commit messages to the device.</p>
 
 </body> </html>

@@ -1,0 +1,708 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Building a Github iOS Client with RestKit Pt. 1</title>
+<style type="text/css">
+
+  body {font-family: Garamond, Bodoni, "Times New Roman"; background-color: #F9F9F9; padding: 5px; font-size: 1.1em; color: #333333; }
+  h1, h2 { font-family: Helvetica, Gill, sans-serif; color: #333333; }
+  h3, h4 { color: #333333; }
+  li {padding-left: 25px; padding-right: 25px; padding-top: 5px; }
+  .code-ref { background-color: #F8F8F8; color: #003399; font-style:italic; padding-left: 5px; padding-right: 5px; font-size: 0.9em; }
+  .code-sig { background-color: #DDDDDD; color: #003399; font-family: "Courier New", Courier; padding-left: 5px; }
+  .code-listing { background-color: #FFFFFF; color: #444444; border: #EEEEEE 1px solid;  padding-bottom: 1px; padding-left: 5px; border-bottom: #DDDDDD 1px solid; border-right: #DDDDDD 1px solid; font-size: 1em }
+  .quote { background-color: #F8F8F8; color: #555555; font-style:italic; padding-left: 25px; padding-right: 25px; width: 500px; margin: 15px; }
+code { color: #555555; }
+  .content { width: 675px; margin: 0px auto; }
+  p { text-align: justify; }
+  .box { background-color: #DDDDDD; color: #333333; padding-left:
+  15px; padding-top: 15px; padding-bottom: 15px;  border: #CCCCCC 1px
+  solid; border-bottom: #CCCCCC 1px solid; border-right: #CCCCCC 1px
+  solid; font-size: 0.95em; font-family: Helvetica, Gill, sans-serif; }
+  .box li { padding: 2px; }
+  .box ul { margin-top: 5px; margin-bottom: 2px; }
+  .footnote { font-style: italic; color:#777777; font-size: 0.9em; padding-left: 5px;
+  padding-right: 25px; padding-bottom: 10px; }
+
+  strike, s { text-decoration: line-through; color: red; font-weight: bold; }
+  .insert { font-weight: bold; font-style: italic; color:#33a933;}
+</style>
+</head>
+
+<body>
+<div class="content">
+
+<h1>Building a Simple Github iOS Client with RestKit Pt. 1</h1>
+
+
+
+<p>This post will demonstrate how to use XCode 4 and an Objective-C library called
+  RestKit to create a very simple iOS client that grabs the commit
+messages for a given project using Github's <a
+href="http://develop.github.com/">RESTful API</a>. Later posts will
+focus on improving the functionality and interface of the client, as
+well as using RestKit's Core Data integration to provide local data persistence.
+</p>
+
+  
+<h2>RestKit</h2>
+
+<p>
+<a
+href="http://restkit.org/">RestKit</a>
+is an open source Objective-C framework for iOS that simplifies
+interacting with RESTful web services. RestKit has been written by <a
+href="http://twotoasters.com/">Two Toasters</a>, and they have written an <a href="http://mobile.tutsplus.com/tutorials/iphone/restkit_ios-sdk/">excellent tutorial</a> for getting started
+with it. They are also about to publish an advanced tutorial, <a
+  href="https://github.com/twotoasters/RestKit/blob/fea3eed7af6d72ec4582c8c9604778d5eb019793/Docs/MobileTuts%20Advanced%20RestKit/First%20Draft.md">a
+  draft</a>
+  of which is available in their Github repo.</p>
+
+
+<div class="footnote">[1] source code for this project is available on
+<a href="https://github.com/liebke/restkit-github-client-example">Github</a>.</div>
+
+<h2>Setting Up RestKit with Xcode 4</h2>
+
+<p>There are instructions on <a
+href="https://github.com/twotoasters/RestKit">Github</a> for installing RestKit as a project
+dependency using either version 3 or 4 of Xcode, but I will start by providing
+slightly more detailed installation instructions using Xcode 4.</p>
+
+<p>
+So let's get started by creating a new project using the
+Navigation-based Application template,
+</p>
+
+<a href="http://incanter.org/ios/images/restkit-setup/new-project.png"><img src="http://incanter.org/ios/images/restkit-setup/new-project.png" width="600" /></a>
+
+<p>
+which we'll call GithubClient. We won't include Core Data or unit
+tests (so make sure those boxes are unselected),
+</p>
+
+<a href="http://incanter.org/ios/images/restkit-setup/new-project-name.png"><img src="http://incanter.org/ios/images/restkit-setup/new-project-name.png" width="600" /></a>
+
+<p>
+but we will want to create a local git repository for the project, so
+select the checkbox at the bottom of the save-as dialog.
+</p>
+
+
+<a href="http://incanter.org/ios/images/restkit-setup/new-project-git.png"><img src="http://incanter.org/ios/images/restkit-setup/new-project-git.png" width="600" /></a>
+
+<p>
+Once the the project is open, I'm going to set the device to
+<b>Universal</b> and the scheme to iPad 4.3 simulator.
+</p>
+
+
+<a href="http://incanter.org/ios/images/restkit-setup/project-start.png"><img src="http://incanter.org/ios/images/restkit-setup/project-start.png" width="600" /></a>
+
+<p>
+Next we want to create a RestKit git submodule in our project
+directory, so open up a terminal window, cd to the project directory
+and enter:;
+<pre><code>git submodule add git://github.com/twotoasters/RestKit.git
+RestKit</code></pre>
+</p>
+
+<a href="http://incanter.org/ios/images/restkit-setup/add-restkit.png"><img src="http://incanter.org/ios/images/restkit-setup/add-restkit.png" width="600" /></a>
+<br />
+
+<p>
+Next open the RestKit project in Xcode, and drag the RestKit.xcodeproj
+file from the RestKit project window and drop it on our
+GithubClient.xcodeproj. Unfortunately, Xcode will only make a project
+availabe in one window at a time, so we can't access the RestKit
+project files from our project until we close the other windows
+containing RestKit, and then re-open our project.
+</p>
+
+<a href="http://incanter.org/ios/images/restkit-setup/add-restkit2.png"><img src="http://incanter.org/ios/images/restkit-setup/add-restkit2.png" width="600" /></a>
+<br />
+
+<p>After re-opening our project, you should be able to toggle open the
+nested RestKit project and see its files.</p>
+
+<p>Next we want to add the RestKit headers to our header search path,
+so select the GithubClient project in the navigation pane, then select
+the project file in the middle pane, and select the <b>Build Settings</b> tab
+in the main pane; then scroll down to the <b>Search Paths</b> section, and
+enter the following text (quotes and all) as the value for both debug and
+release in the <b>Header Search Path</b> section:
+
+<pre><code>"$(SOURCE_ROOT)/RestKit/Build"</code></pre>
+</p>
+
+
+<a href="http://incanter.org/ios/images/restkit-setup/add-header-search.png"><img src="http://incanter.org/ios/images/restkit-setup/add-header-search.png" width="600" /></a>
+<br />
+
+<p>Now set the following text as the value for debug and
+release in the <b>Library Search Path</b> section:
+
+<pre><code>"$(SOURCE_ROOT)/RestKit/Build/$(BUILD_STYLE)-$(PLATFORM_NAME)"</code></pre>
+</p>
+
+<a href="http://incanter.org/ios/images/restkit-setup/add-library-search.png"><img src="http://incanter.org/ios/images/restkit-setup/add-library-search.png" width="600" /></a>
+<br />
+
+<p>Now scroll up to the <b>Linking</b> section of the build settings, and
+enter the following text for debug and release in the <b>Other Linker Flags</b> section:
+
+<pre><code>-ObjC -all_load</code></pre>
+</p>
+
+<a href="http://incanter.org/ios/images/restkit-setup/add-linker-flags.png"><img src="http://incanter.org/ios/images/restkit-setup/add-linker-flags.png" width="600" /></a>
+<br />
+
+<p>Now we want to add the RestKit target as a target dependency, so select the GithubClient target in the middle pane, and select
+the <b>Build Phases</b> tab from the main pane, open the <b>Target
+Dependencies</b> section, and click the <b>+ </b>button to add the RestKit target.</p>
+
+<a href="http://incanter.org/ios/images/restkit-setup/add-restkit-target2.png"><img src="http://incanter.org/ios/images/restkit-setup/add-restkit-target2.png" width="600" /></a>
+<br />
+
+<p>Now we want to add the following libraries to the <b>Link Binary
+with Libraries</b> section of the <b>Build Phases</b> tab:
+<div class="box">
+<ul>
+<li>libRestKitCoreData.a </li>
+<li>libRestKitJSONParserYAJL.a </li>
+<li>libRestKitNetwork.a </li>
+<li>libRestKitObjectMapping.a </li>
+<li>libRestKitSupport.a </li>
+<li>CFNetwork.framework </li>
+<li>CoreData.framework </li>
+<li>MobileCoreServices.framework </li>
+<li>SystemConfiguration.framework </li>
+</ul>
+</div>
+</p>
+
+<a href="http://incanter.org/ios/images/restkit-setup/add-dependencies2.png"><img src="http://incanter.org/ios/images/restkit-setup/add-dependencies2.png" width="600" /></a>
+<br />
+
+<p>Finally, let's make sure we configured everything correctly by
+including the following RestKit headers in our
+<b>RootViewController.h</b> file and the building the project with the
+<b>Cmd-b</b> keyboard short cut, or by hitting the <b>run</b> button at the
+top:
+
+<pre><code>
+#import &lt;RestKit/RestKit.h&gt;
+#import &lt;RestKit/CoreData/CoreData.h&gt;
+</code></pre>
+</p>
+
+<a href="http://incanter.org/ios/images/restkit-setup/build-test.png"><img src="http://incanter.org/ios/images/restkit-setup/build-test.png" width="600" /></a>
+<br />
+
+<p>If everything built, you're good to go.</p>
+
+
+<h2>Github API</h2>
+
+<p>
+For this simple client we'll use <a
+href="http://develop.github.com/p/commits.html">Github's RESTful
+API</a> to retrieve the commit messages for a given project, which
+returns JSON formatted as follows.
+</p>
+
+<span class="code-ref"><a href="http://github.com/api/v2/json/commits/list/mojombo/grit/master ">http://github.com/api/v2/json/commits/list/mojombo/grit/master</a></span>
+<div class="code-listing">
+<pre><code>
+{
+  "commits": [
+    {
+      "parents": [
+        {
+          "id": "e3be659a93ce0de359dd3e5c3b3b42ab53029065"
+        }
+      ],
+      "author": {
+        "name": "Ryan Tomayko",
+        "login": "rtomayko",
+        "email": "rtomayko@gmail.com"
+      },
+      "url": "/mojombo/grit/commit/6b7dff52aad33df4bfc0c0eaa88922fe1d1cd43b",
+      "id": "6b7dff52aad33df4bfc0c0eaa88922fe1d1cd43b",
+      "committed_date": "2010-12-09T13:50:17-08:00",
+      "authored_date": "2010-12-09T13:50:17-08:00",
+      "message": "update History.txt with bug fix merges",
+      "tree": "a6a09ebb4ca4b1461a0ce9ee1a5b2aefe0045d5f",
+      "committer": {
+        "name": "Ryan Tomayko",
+        "login": "rtomayko",
+        "email": "rtomayko@gmail.com"
+      }
+    }
+  ]
+}
+</code></pre>
+</div>
+
+<p>The result consists of a single JSON object containing a single
+field, called commits, which is an array of objects that include
+fields like author, committer, message, url.</p>
+
+<h2>Creating RKObjects</h2>
+
+<p>RKObject is a RestKit class that can be mapped to and from JSON
+objects.  We will create three
+Objective-C objects, GHCommitSet, GHCommit, and GHUser that we will
+map to these JSON objects.</p>
+
+<h3>GHUser</h3>
+
+<p>First lets create a class called <b>GHUser</b> that will represent
+the author and committer fields in the commit JSON object. First create an new Object-C class
+(<b>File->New->New File->Object-C Class</b>) as a subclass of <b>RKObject</b>, and then
+edit the <a
+href="https://github.com/liebke/restkit-github-client-example/blob/part1/GithubClient/GHUser.h">GHUser.h</a>
+file to add the following properties: <b>name</b>, <b>login</b>, and
+<b>email</b>.
+</p>
+
+<span class="code-ref"><a href="https://github.com/liebke/restkit-github-client-example/blob/part1/GithubClient/GHUser.h">GHUser.h</a></span>
+<div class="code-listing">
+<pre><code>
+#import &lt;Foundation/Foundation.h&gt;
+#import &lt;RestKit/RestKit.h&gt;
+
+
+@interface GHUser : RKObject {
+    NSString* _name;
+    NSString* _login;
+    NSString* _email;
+}
+
+@property (nonatomic, retain) NSString* name;
+@property (nonatomic, retain) NSString* login;
+@property (nonatomic, retain) NSString* email;
+
+@end
+</code></pre>
+</div>
+
+<p>Next implement <a
+href="https://github.com/liebke/restkit-github-client-example/blob/part1/GithubClient/GHUser.m">GHUser.m</a>,
+which will look like any other basic Objective-C class, using
+@synthesize to implement its properties, but there will be an
+additional method, <b>elementToPropertyMappings</b>, which returns an
+<b>NSDictionary</b> that maps attributes in
+the JSON object to properties in the Obj-C object.</p>
+
+<span class="code-ref"><a href="https://github.com/liebke/restkit-github-client-example/blob/part1/GithubClient/GHUser.m">GHUser.m</a></span>
+<div class="code-listing">
+<pre><code>
+#import "GHUser.h"
+
+@implementation GHUser
+
+@synthesize name = _name;
+@synthesize login = _login;
+@synthesize email = _email;
+
++ (NSDictionary*)elementToPropertyMappings {
+    return [NSDictionary dictionaryWithKeysAndObjects:
+            @"name", @"name",
+            @"login", @"login",
+            @"email", @"email",
+            nil];
+}
+
+@end
+</code></pre>
+</div>
+
+
+<h3>GHCommit</h3>
+
+<p>Now let's create a class called <b>GHCommit</b> that will represent
+Github's commit JSON object, again as a subclass <b>RKObject</b>, and then
+add the following properties to the <a
+href="https://github.com/liebke/restkit-github-client-example/blob/part1/GithubClient/GHCommit.h">GHCommit.h</a>
+file: <b>message</b>, <b>url</b>, <b>author</b>, and
+<b>committer</b>.
+</p>
+
+<span class="code-ref"><a href="https://github.com/liebke/restkit-github-client-example/blob/part1/GithubClient/GHCommit.h">GHCommit.h</a></span>
+<div class="code-listing">
+<pre><code>
+#import &lt;Foundation/Foundation.h&gt;
+#import &lt;RestKit/RestKit.h&gt;
+#import "GHUser.h"
+
+@interface GHCommit : RKObject {
+    NSString* _message;
+    NSString* _url;
+    GHUser* _author;
+    GHUser* _committer;
+}
+
+@property (nonatomic, retain) NSString* message;
+@property (nonatomic, retain) NSString* url;
+@property (nonatomic, retain) GHUser* author;
+@property (nonatomic, retain) GHUser* committer;
+
+
+@end
+
+</code></pre>
+</div>
+
+
+<p>Next implement <a
+href="https://github.com/liebke/restkit-github-client-example/blob/part1/GithubClient/GHCommit.m">GHCommit.m</a>,
+which will have an <b>elementToPropertyMappings</b> method, just like
+GHUser, where we'll map the message and url properties to their
+respective JSON fields. GHCommit will include one more method, called
+<b>elementToRelationshipMappings</b>, which will map the author and
+committer JSON fields to GHUser objects.</p>
+
+<span class="code-ref"><a href="https://github.com/liebke/restkit-github-client-example/blob/part1/GithubClient/GHCommit.m">GHCommit.m</a></span>
+<div class="code-listing">
+<pre><code>
+#import "GHCommit.h"
+
+@implementation GHCommit
+
+@synthesize message = _message;
+@synthesize url = _url;
+@synthesize author = _author;
+@synthesize committer = _committer;
+
+
++ (NSDictionary*) elementToPropertyMappings {
+    return [NSDictionary dictionaryWithKeysAndObjects:
+            @"message", @"message",
+            @"url", @"url",
+            nil];
+}
+
++ (NSDictionary*) elementToRelationshipMappings {
+    return [NSDictionary dictionaryWithKeysAndObjects:
+            @"author", @"author",
+            @"committer", @"committer", 
+            nil];
+}
+
+@end
+</code></pre>
+</div>
+
+
+
+<h3>GHCommitSet</h3>
+
+<p>Finally, the last data class we need is GHCommitSet, which will
+only have a single property, called commits, the value of which will be an
+NSArray of GHCommit objects.</p>
+
+<span class="code-ref"><a href="https://github.com/liebke/restkit-github-client-example/blob/part1/GithubClient/GHCommitSet.h">GHCommitSet.h</a></span>
+<div class="code-listing">
+<pre><code>
+#import &lt;Foundation/Foundation.h&gt;
+#import &lt;RestKit/RestKit.h&gt;
+
+
+@interface GHCommitSet : RKObject {
+    NSArray* _commits;
+}
+
+@property (nonatomic, retain) NSArray* commits;
+
+@end
+</code></pre>
+</div>
+
+
+<p>Like GHCommit, we'll need both the <b>elementToPropertyMappings</b> and <b>elementToRelationshipMappings</b> methods, but
+since there are no simple property types in the class, the <b>elementToPropertyMappings</b>
+method will return an empty NSDictionary.</p>
+
+<span class="code-ref"><a href="https://github.com/liebke/restkit-github-client-example/blob/part1/GithubClient/GHCommitSet.m">GHCommitSet.m</a></span>
+<div class="code-listing">
+<pre><code>
+#import "GHCommitSet.h"
+#import "GHCommit.h"
+
+@implementation GHCommitSet
+
+@synthesize commits = _commits;
+
++ (NSDictionary*) elementToPropertyMappings {
+    return [NSDictionary dictionaryWithKeysAndObjects: nil];
+}
+
++ (NSDictionary*) elementToRelationshipMappings {
+    return [NSDictionary dictionaryWithKeysAndObjects:
+            @"commits", @"commits", nil];
+}
+
+@end
+</code></pre>
+</div>
+
+<p>Notice that we map <b>commits</b> to the GHCommit class, not
+NSArray, in the next step we will tell the RKObjectMapper which class
+<b>commits</b> maps to.</p>
+
+
+<h2>Deserializing JSON Objects</h2>
+
+<h3>GithubClientAppDelegate.m</h3>
+
+<p>Now we need to initialize RestKit's RKObjectManager and map the
+commits element to the GHCommit class, both of which we'll do
+in the <b>application:didFinishLaunchingWithOptions:</b> method of the
+<b>GithubClientAppDelegate.m</b> class. </p>
+
+<span class="code-ref"><a href="https://github.com/liebke/restkit-github-client-example/blob/part1/GithubClient/GithubClientAppDelegate.m">GithubClientAppDelegate.m</a></span>
+<div class="code-listing">
+<pre><code>
+- (BOOL)application:(UIApplication *)application
+        didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    // Initialize RestKit
+    NSString* baseUrl = @"http://github.com/api/v2/json/commits/list";
+    RKObjectManager* objectManager = [RKObjectManager objectManagerWithBaseURL:baseUrl];
+
+    // Map JSON elements to Obj-C classes
+    RKObjectMapper* mapper = objectManager.mapper;
+   [mapper registerClass:[GHCommit class] forElementNamed:@"commits"];
+    
+    // ... rest of generated method definition
+}
+</code></pre>
+</div>
+
+<h2>Viewing the Results in a UITableView</h2>
+
+<p>Now that JSON to Obj-C mappings are taken care of, let's display
+the commit messages for a project on github, in this case my <a href="http://incanter.org">Incanter</a> project.</p>
+
+<h3>RootViewController.xib</h3>
+
+<p>First, let's add an <b>IBOutlet</b> called <b>commitsView</b> to
+the <b>RootViewController.h</b> file and link it to the
+UITableView in the <b>RootViewController.xib</b> file.</p>
+
+<p>We can do both steps
+at once with Interface Builder, so open the xib file and select the
+<b>Assistant editor</b> view, making sure the RootViewController.h file is
+open in the second pane. Now just Ctrl-drag from UITableView widget to
+header file (just above the @end keyword),</p>
+
+<span class="code-ref"><a href="https://github.com/liebke/restkit-github-client-example/blob/part1/GithubClient/en.lproj/RootViewController.xib">RootViewController.xib</a></span>
+<a href="http://incanter.org/ios/images/gh-client/add-outlet.png"><img src="http://incanter.org/ios/images/gh-client/add-outlet.png" width="600" /></a>
+<br />
+
+<p>and name it <b>commitsView</b>
+when prompted. That will create the
+appropriate IBOutlet property in the header, add the @synthesize
+statement to RootViewController.m (as well as a call to <b>release</b>
+in its <b>dealloc</b> method), and link the commitsView property
+to the UITable view in the xib file.</p>
+
+<a href="http://incanter.org/ios/images/gh-client/add-outlet2.png"><img src="http://incanter.org/ios/images/gh-client/add-outlet2.png" width="300" /></a>
+<br />
+
+<br />
+<h3>RootViewController.h</h3>
+
+<p>Now we want to indicate that the RootViewController class
+implements the following protocols: <b>TableViewDelegate</b>,
+<b>UITableViewDataSource</b>, <b>RKObjectLoaderDelegate</b>. We also
+want to add an NSArray property, called commits, to the
+RootViewController that we will use to store the GHCommit objects
+retrieved from Github.</p>
+
+<span class="code-ref"><a href="https://github.com/liebke/restkit-github-client-example/blob/part1/GithubClient/RootViewController.h">RootViewController.h</a></span>
+<div class="code-listing">
+<pre><code>
+#import &lt;UIKit/UIKit.h&gt;
+#import &lt;RestKit/RestKit.h&gt;
+
+@interface RootViewController : UITableViewController &lt;UITableViewDelegate,
+                                                       UITableViewDataSource,
+                                                       RKObjectLoaderDelegate&gt;
+{
+    NSArray* _commits;
+    UITableView *_commitsView;
+
+}
+
+@property (nonatomic, retain) NSArray* commits;
+@property (nonatomic, retain) IBOutlet UITableView *commitsView;
+
+@end
+</code></pre>
+</div>
+
+
+<br />
+<h3>RootViewController.m</h3>
+
+<p>In addition to adding the @synthesize statement and call to release
+in dealloc for the commits property, we'll want to add code to
+the <b>viewDidLoad</b> method that will retrieve the commit
+messages for the Incanter project from Github.</p>
+
+<p>The call is
+asynchronous, so we'll need to pass a <b>RKObjectLoaderDelegate</b>
+object to handle the response, which in this case will be <b>self</b>
+because RootViewController implements the RKObjectLoaderDelegate</b>
+protocol, at least it will once we implement the necessary functions.</p>
+
+
+<span class="code-ref"><a href="https://github.com/liebke/restkit-github-client-example/blob/part1/GithubClient/RootViewController.m">RootViewController.m</a></span>
+<div class="code-listing">
+<pre><code>
+#import "GHCommitSet.h"
+
+@synthesize commits = _commits;
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    NSString* repo = @"/liebke/incanter/master";
+    self.title = repo;
+    
+    // Load the object model via RestKit	
+	RKObjectManager* objectManager = [RKObjectManager sharedManager];
+	[objectManager loadObjectsAtResourcePath:repo
+                       objectClass:[GHCommitSet class]
+                       delegate:self];
+
+
+- (void)dealloc
+{
+    [_commitsView release];
+    [_commits release];
+    [super dealloc];
+}
+
+}
+</code></pre>
+</div>
+
+
+<br />
+<h3>RootViewController.m: RKObjectLoaderDelegate methods</h3>
+
+<p>Alright, now we need to implement the
+<b>objectLoader:didLoadObjects:</b> and
+<b>objectLoader:didFailWithError:</b> methods of the
+<b>RKObjectLoaderDelegate</b> protocol. The first method will take an
+RKObjectLoader and an NSArray containing an array with a single
+instance of GHCommitSet. We will set the RootViewController's commits
+instance variable to the value of the GHCommitSet's commits property.</p>
+
+<span class="code-ref"><a href="https://github.com/liebke/restkit-github-client-example/blob/part1/GithubClient/RootViewController.m">RootViewController.m</a></span>
+<div class="code-listing">
+<pre><code>
+- (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObjects:(NSArray*)objects 
+{
+	[_commits release];
+	_commits = [[[objects objectAtIndex:0] commits] retain];
+        [self.commitsView reloadData];
+}
+</code></pre>
+</div>
+
+<p>For the <b>objectLoader:didFailWithError:</b> method, we'll show a
+UIAlertView with a description of the error.</p>
+
+<span class="code-ref"><a href="https://github.com/liebke/restkit-github-client-example/blob/part1/GithubClient/RootViewController.m">RootViewController.m</a></span>
+<div class="code-listing">
+<pre><code>
+- (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error 
+{
+	UIAlertView* alert = [[[UIAlertView alloc]
+                                   initWithTitle:@"Error"
+                                   message:[error localizedDescription]
+                                   delegate:nil
+                                   cancelButtonTitle:@"OK"
+                                   otherButtonTitles:nil] autorelease];
+	[alert show];
+}
+</code></pre>
+</div>
+
+<br />
+<h3>RootViewController.m: UITableViewDataSource methods</h3>
+
+<p>Now we need to implement the methods for the
+<b>UITableViewDataSource</b> protocol. First we'll implement the
+<b>numberOfSectionsInTableView:</b> method, and just have it always return 1.</p>
+
+
+<span class="code-ref"><a href="https://github.com/liebke/restkit-github-client-example/blob/part1/GithubClient/RootViewController.m">RootViewController.m</a></span><div class="code-listing">
+<pre><code>
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+</code></pre>
+</div>
+
+<p>Next we'll implement the <b>tableView:numberOfRowsInSection:</b>
+method, which will just return the count of the <b>commits</b> property.</p>
+
+<span class="code-ref"><a href="https://github.com/liebke/restkit-github-client-example/blob/part1/GithubClient/RootViewController.m">RootViewController.m</a></span><div class="code-listing">
+<pre><code>
+- (NSInteger)tableView:(UITableView *)tableView
+             numberOfRowsInSection:(NSInteger)section
+{
+    return [self.commits count];
+}
+</code></pre>
+</div>
+
+<p>Finally, we need to implement the
+<b>tableView:cellForRowAtIndexPath:</b> method. Most of the
+implementation is included by the template we used to create the
+project, we just need to add the line that sets the value of the
+cell's textLable to the value of the message from the GHCommit object
+at the indexPath.row passed into the method.</p>
+
+<span class="code-ref"><a href="https://github.com/liebke/restkit-github-client-example/blob/part1/GithubClient/RootViewController.m">RootViewController.m</a></span><div class="code-listing">
+<pre><code>
+// Customize the appearance of table view cells.
+- (UITableViewCell *)tableView:(UITableView *)tableView
+                     cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[[UITableViewCell alloc]
+                    initWithStyle:UITableViewCellStyleDefault
+                    reuseIdentifier:CellIdentifier] autorelease];
+    }
+
+    // Configure the cell.
+    cell.textLabel.text = [[self.commits objectAtIndex:indexPath.row] message];
+    return cell;
+}
+</code></pre>
+</div>
+
+<p>That's it, we can run the code and an iPad (or iPhone) simulator
+will start with a basic list view of the most recent commit messages
+from the Incanter project on Github.</p>
+
+
+<a href="http://incanter.org/ios/images/gh-client/ipad-simulator.png"><img src="http://incanter.org/ios/images/gh-client/ipad-simulator.png" width="300" /></a>
+<br />
+
+<p>Future posts will continue to build this example, adding the
+ability to browse different projects, see more details on individual
+commits, and use RestKit's Core Data integration to persist the
+commit messages to the device.</p>
+
+</body> </html>

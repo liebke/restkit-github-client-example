@@ -34,8 +34,12 @@ code { color: #555555; }
 <h1>Building a Simple Github iOS Client with RestKit Pt. 1</h1>
 
 
-    <p>This tutorial will demonstrate how to use XCode 4 to build a very simple <a href="http://github.com">Github</a> iOS client that retrieves commit messages for a given project using an open source Objective-C library called <a href="http://restkit.org">RestKit</a>, written by <a href="http://twotoasters.com">Two Toasters</a>. Later posts will focus on improving the functionality and interface of the client, as
-    well as using RestKit's Core Data integration to provide local data persistence. The source code for the project is available on <a href="https://github.com/liebke/restkit-github-client-example/">Github</a>, and additional iOS resources are available at <a href="http://liebke.me/ios-resources/">http://liebke.me/ios-resources/</a>.</p>
+    <p>This tutorial will demonstrate how to use XCode 4 to build a very simple <a href="http://github.com">Github</a> iOS client that retrieves commit messages for a given project using an open source Objective-C library called <a href="http://restkit.org">RestKit</a>.</p>
+    
+    <p>Later posts will focus on improving the functionality and interface of the client, as
+    well as using RestKit's Core Data integration to provide local data persistence.</p>
+    
+    <p>The source code for the project is available on <a href="https://github.com/liebke/restkit-github-client-example/">Github</a>, and additional iOS resources are available at <a href="http://liebke.me/ios-resources/">http://liebke.me/ios-resources/</a>.</p>
 
 
   
@@ -51,7 +55,7 @@ is an open source Objective-C framework for iOS that simplifies interacting with
 
 <h2>Setting Up RestKit with Xcode 4</h2>
 
-<p>There are instructions on <a href="https://github.com/twotoasters/RestKit">Github</a> for installing RestKit as a project dependency using either version 3 or 4 of Xcode, but I will start by providing slightly more detailed installation instructions using Xcode 4.</p>
+    <p>There are instructions on <a href="https://github.com/twotoasters/RestKit">Github</a> for installing RestKit as a project dependency using either version 3 or 4 of Xcode; I will start by providing a detailed walk through of the installation instructions for Xcode 4.</p>
 
 <p>
 So let's get started by creating a new project using the Navigation-based Application template,
@@ -196,7 +200,7 @@ For this simple client we'll use <a href="http://develop.github.com/p/commits.ht
 </code></pre>
 </div>
 
-<p>The result consists of a single JSON object containing a single field, called commits, which is an array of objects that include fields like author, committer, message, url.</p>
+    <p>The result consists of a single JSON object containing a single field, called commits, which is an array of objects that include fields like author, committer, message, url; author and committer are objects representing Github users, and include fields for name, login, and email.</p>
 
 <h2>Creating RKObjects</h2>
 

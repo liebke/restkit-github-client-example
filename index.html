@@ -73,14 +73,14 @@ So let's get started by creating a new project using the
 Navigation-based Application template,
 </p>
 
-<a href="http://incanter.org/ios/images/restkit-setup/new-project.png"><img src="http://incanter.org/ios/images/restkit-setup/new-project.png" width="600" /></a>
+<a href="images/restkit-setup/new-project.png"><img src="images/restkit-setup/new-project.png" width="600" /></a>
 
 <p>
 which we'll call GithubClient. We won't include Core Data or unit
 tests (so make sure those boxes are unselected),
 </p>
 
-<a href="http://incanter.org/ios/images/restkit-setup/new-project-name.png"><img src="http://incanter.org/ios/images/restkit-setup/new-project-name.png" width="600" /></a>
+<a href="images/restkit-setup/new-project-name.png"><img src="images/restkit-setup/new-project-name.png" width="600" /></a>
 
 <p>
 but we will want to create a local git repository for the project, so
@@ -88,7 +88,7 @@ select the checkbox at the bottom of the save-as dialog.
 </p>
 
 
-<a href="http://incanter.org/ios/images/restkit-setup/new-project-git.png"><img src="http://incanter.org/ios/images/restkit-setup/new-project-git.png" width="600" /></a>
+<a href="images/restkit-setup/new-project-git.png"><img src="images/restkit-setup/new-project-git.png" width="600" /></a>
 
 <p>
 Once the the project is open, I'm going to set the device to
@@ -96,7 +96,7 @@ Once the the project is open, I'm going to set the device to
 </p>
 
 
-<a href="http://incanter.org/ios/images/restkit-setup/project-start.png"><img src="http://incanter.org/ios/images/restkit-setup/project-start.png" width="600" /></a>
+<a href="images/restkit-setup/project-start.png"><img src="images/restkit-setup/project-start.png" width="600" /></a>
 
 <p>
 Next we want to create a RestKit git submodule in our project
@@ -106,7 +106,7 @@ and enter:;
 RestKit</code></pre>
 </p>
 
-<a href="http://incanter.org/ios/images/restkit-setup/add-restkit.png"><img src="http://incanter.org/ios/images/restkit-setup/add-restkit.png" width="600" /></a>
+<a href="images/restkit-setup/add-restkit.png"><img src="images/restkit-setup/add-restkit.png" width="600" /></a>
 <br />
 
 <p>
@@ -118,7 +118,7 @@ project files from our project until we close the other windows
 containing RestKit, and then re-open our project.
 </p>
 
-<a href="http://incanter.org/ios/images/restkit-setup/add-restkit2.png"><img src="http://incanter.org/ios/images/restkit-setup/add-restkit2.png" width="600" /></a>
+<a href="images/restkit-setup/add-restkit2.png"><img src="images/restkit-setup/add-restkit2.png" width="600" /></a>
 <br />
 
 <p>After re-opening our project, you should be able to toggle open the
@@ -135,7 +135,7 @@ release in the <b>Header Search Path</b> section:
 </p>
 
 
-<a href="http://incanter.org/ios/images/restkit-setup/add-header-search.png"><img src="http://incanter.org/ios/images/restkit-setup/add-header-search.png" width="600" /></a>
+<a href="images/restkit-setup/add-header-search.png"><img src="images/restkit-setup/add-header-search.png" width="600" /></a>
 <br />
 
 <p>Now set the following text as the value for debug and
@@ -144,7 +144,7 @@ release in the <b>Library Search Path</b> section:
 <pre><code>"$(SOURCE_ROOT)/RestKit/Build/$(BUILD_STYLE)-$(PLATFORM_NAME)"</code></pre>
 </p>
 
-<a href="http://incanter.org/ios/images/restkit-setup/add-library-search.png"><img src="http://incanter.org/ios/images/restkit-setup/add-library-search.png" width="600" /></a>
+<a href="images/restkit-setup/add-library-search.png"><img src="images/restkit-setup/add-library-search.png" width="600" /></a>
 <br />
 
 <p>Now scroll up to the <b>Linking</b> section of the build settings, and
@@ -153,14 +153,14 @@ enter the following text for debug and release in the <b>Other Linker Flags</b> 
 <pre><code>-ObjC -all_load</code></pre>
 </p>
 
-<a href="http://incanter.org/ios/images/restkit-setup/add-linker-flags.png"><img src="http://incanter.org/ios/images/restkit-setup/add-linker-flags.png" width="600" /></a>
+<a href="images/restkit-setup/add-linker-flags.png"><img src="images/restkit-setup/add-linker-flags.png" width="600" /></a>
 <br />
 
 <p>Now we want to add the RestKit target as a target dependency, so select the GithubClient target in the middle pane, and select
 the <b>Build Phases</b> tab from the main pane, open the <b>Target
 Dependencies</b> section, and click the <b>+ </b>button to add the RestKit target.</p>
 
-<a href="http://incanter.org/ios/images/restkit-setup/add-restkit-target2.png"><img src="http://incanter.org/ios/images/restkit-setup/add-restkit-target2.png" width="600" /></a>
+<a href="images/restkit-setup/add-restkit-target2.png"><img src="images/restkit-setup/add-restkit-target2.png" width="600" /></a>
 <br />
 
 <p>Now we want to add the following libraries to the <b>Link Binary
@@ -180,7 +180,7 @@ with Libraries</b> section of the <b>Build Phases</b> tab:
 </div>
 </p>
 
-<a href="http://incanter.org/ios/images/restkit-setup/add-dependencies2.png"><img src="http://incanter.org/ios/images/restkit-setup/add-dependencies2.png" width="600" /></a>
+<a href="images/restkit-setup/add-dependencies2.png"><img src="images/restkit-setup/add-dependencies2.png" width="600" /></a>
 <br />
 
 <p>Finally, let's make sure we configured everything correctly by
@@ -195,7 +195,7 @@ top:
 </code></pre>
 </p>
 
-<a href="http://incanter.org/ios/images/restkit-setup/build-test.png"><img src="http://incanter.org/ios/images/restkit-setup/build-test.png" width="600" /></a>
+<a href="images/restkit-setup/build-test.png"><img src="images/restkit-setup/build-test.png" width="600" /></a>
 <br />
 
 <p>If everything built, you're good to go.</p>
@@ -497,7 +497,7 @@ open in the second pane. Now just Ctrl-drag from UITableView widget to
 header file (just above the @end keyword),</p>
 
 <span class="code-ref"><a href="https://github.com/liebke/restkit-github-client-example/blob/part1/GithubClient/en.lproj/RootViewController.xib">RootViewController.xib</a></span>
-<a href="http://incanter.org/ios/images/gh-client/add-outlet.png"><img src="http://incanter.org/ios/images/gh-client/add-outlet.png" width="600" /></a>
+<a href="images/gh-client/add-outlet.png"><img src="images/gh-client/add-outlet.png" width="600" /></a>
 <br />
 
 <p>and name it <b>commitsView</b>
@@ -507,7 +507,7 @@ statement to RootViewController.m (as well as a call to <b>release</b>
 in its <b>dealloc</b> method), and link the commitsView property
 to the UITable view in the xib file.</p>
 
-<a href="http://incanter.org/ios/images/gh-client/add-outlet2.png"><img src="http://incanter.org/ios/images/gh-client/add-outlet2.png" width="300" /></a>
+<a href="images/gh-client/add-outlet2.png"><img src="images/gh-client/add-outlet2.png" width="300" /></a>
 <br />
 
 <br />
@@ -697,7 +697,7 @@ will start with a basic list view of the most recent commit messages
 from the Incanter project on Github.</p>
 
 
-<a href="http://incanter.org/ios/images/gh-client/ipad-simulator.png"><img src="http://incanter.org/ios/images/gh-client/ipad-simulator.png" width="300" /></a>
+<a href="images/gh-client/ipad-simulator.png"><img src="images/gh-client/ipad-simulator.png" width="300" /></a>
 <br />
 
 <p>Future posts will continue to build this example, adding the
